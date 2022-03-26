@@ -15,13 +15,15 @@ export default function SearchFoodItem() {
   },[])
 
   return (
+    
     <List>
       {
         foodItems.map((item,idx)=>(
           <ListItem
           key = {idx}>
               <ListItemText
-              primary = {item.foodItemName}/>                      
+              primary = {item.foodItemName}      
+              secondary={'$' + item.price} />                
           </ListItem>
         ))
       }

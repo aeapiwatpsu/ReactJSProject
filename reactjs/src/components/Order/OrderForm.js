@@ -66,7 +66,7 @@ export default function OrderForm(props) {
                 InputProps = {{
                   startAdornment : <InputAdornment
                   className={classes.adornmentText}
-                  position="start"></InputAdornment>
+                  position="start">#</InputAdornment>
                 }}
             />
             <Select
