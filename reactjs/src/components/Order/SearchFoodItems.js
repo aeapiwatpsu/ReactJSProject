@@ -83,7 +83,7 @@ export default function SearchFoodItem(props) {
               primary = {item.foodItemName}      
               secondary={'$' + item.price} />
               <ListItemSecondaryAction>
-                                <IconButton onClicke={e => addFoodItem(item)}>
+                                <IconButton onClick={e => addFoodItem(item)}>
                                     <PlusOneIcon />
                                     <ArrowForwardIosIcon />
                                 </IconButton>

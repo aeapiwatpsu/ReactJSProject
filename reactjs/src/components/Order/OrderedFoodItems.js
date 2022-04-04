@@ -13,9 +13,10 @@ export default function OrderedFoodItems(props) {
               <ListItemText
               primary={item.foodItemName}
               primaryTypographyProps={{
+                component : 'h1',
                 style: {
-                    textAlign: 'center',
-                    fontStyle: 'italic'
+                    fontWeight : '300',
+                    fontSize: '1.2em'
                 }
             }}
             />
