@@ -14,7 +14,7 @@ const generateOrderNumber = () => Math.floor(100000 + Math.random() * 900000).to
     pMethod : 'none',
     gTotal : 0,
     deletedOrderItemIds : '',
-    orderdetails : []
+    orderDetails : []
   })
 
 export default function Order(){
@@ -27,26 +27,11 @@ export default function Order(){
         handleInputChange,
         resetFormControls
   } = useForm(getFreshMethodObject);
-
-  const addFoodItem = foodItem => {
-
-    let x = {
-      orderMasterId : values.orderMasterId,
-      orderDetailId : 0,
-      foodItemId : foodItem.foodItemId,
-      quantity : 1,
-      foodItemPrice : foodItem.foodItemPrice,
-      foodItemName:  foodItem.foodItemName
-    }
-    setValues({
-      ...values,
-      orderdetails : [...values.orderdetails, x]
-    })
-  }
+    
 
     return(
    
-            <Grid container>
+            <Grid container spacing={2}>
                 <Grid item xs = {12}>
                      <OrderForm
                 {...{ values, errors, handleInputChange }}
@@ -54,12 +39,12 @@ export default function Order(){
                 </Grid>
                    <Grid item xs = {6}>
                      <SearchFoodItems 
-                        {...{ addFoodItem }}
+                        {...{ values, setValues }}
                      />  
                    </Grid> 
                    <Grid item xs = {6}>
                      <OrderedFoodItems 
-                      {...{OrderedFoodItems : values.orderdetails}}
+                      {...{values, setValues}}
                      />  
                    </Grid> 
             </Grid>
