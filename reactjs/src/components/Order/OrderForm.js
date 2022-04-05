@@ -44,6 +44,7 @@ export default function OrderForm(props) {
   
   const [customerList, setCustomerList] = useState([]);
   const [orderListVisibility, setOrderListVisibility] = useState(false);
+  const [orderId, setOrderId] = useState(0);
 
   useEffect(() => {
     createAPIEndpoint(ENDPIONTS.CUSTOMER).fetchAll()
@@ -56,7 +57,7 @@ export default function OrderForm(props) {
             setCustomerList(customerList);
         })
         .catch(err => console.log(err))
-}, [])
+  }, [])
 
   useEffect(()=>{
     let gTotal = values.orderDetails.reduce((tempTotal, item) => {
@@ -65,8 +66,20 @@ export default function OrderForm(props) {
   setValues({
     ...values,
     gTotal: roundTo2DecimalPoint(gTotal)
-})
+  })
   },[JSON.stringify(values.orderDetails)]);
+
+  useEffect(() => {
+    if (orderId == 0) resetFormControls()
+    else {
+        createAPIEndpoint(ENDPIONTS.ORDER).fetchById(orderId)
+            .then(res => {
+                setValues(res.data);
+                setErrors({});
+            })
+            .catch(err => console.log(err))
+    }
+  }, [orderId]);
 
   const validateForm = () => {
     let temp = {};
@@ -76,14 +89,23 @@ export default function OrderForm(props) {
     setErrors({...temp});
     return Object.values(temp).every(x=>x==="");
 }
+
   const submitOrder=e=>{
     e.preventDefault();
     if(validateForm()){
+      if (values.orderMasterId == 0){
       createAPIEndpoint(ENDPIONTS.ORDER).create(values)
       .then(res=>{
         console.log(res.data)
       })
       .catch(err=>console.log(err));
+      }else{
+        createAPIEndpoint(ENDPIONTS.ORDER).update(values.orderMasterId, values)
+        .then(res => {
+        setOrderId(0);
+        })
+        .catch(err => console.log(err));
+      }
     }
   }
   
@@ -159,7 +181,8 @@ export default function OrderForm(props) {
     title="List of Orders"
     openPopup={orderListVisibility}
     setOpenPopup={setOrderListVisibility}>
-      <OrderList/>
+      <OrderList
+      {...{ setOrderId, setOrderListVisibility}} />
     </Popup>
     </>
   );
