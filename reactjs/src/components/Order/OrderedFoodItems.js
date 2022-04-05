@@ -40,6 +40,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function OrderedFoodItems(props) {
+
   const {values, setValues} = props;
   const classes = useStyles();
   
@@ -47,7 +48,7 @@ export default function OrderedFoodItems(props) {
 
   const removeFoodItem = (index, id) => {
     let x = {...values};
-    x.orderDetails = x.orderDetails.filter ((_, i) => i != index)
+    x.orderDetails = x.orderDetails.filter ((_, i) => i != index);
     setValues ({...x});
   }
 
@@ -62,8 +63,19 @@ export default function OrderedFoodItems(props) {
 
   return (
     <List>
-      {
-        orderedFoodItems.map((item,idx)=>(
+      { orderedFoodItems.length == 0?
+        <ListItem>
+          <ListItemText
+            primary = "Please select food items"
+            primaryTypographyProps={{
+              style: {
+                textAlign: 'center',
+                fontStyle: 'italic'
+              }
+            }}
+          />
+        </ListItem>
+        :orderedFoodItems.map((item,idx)=>(
           <Paper key={idx} className = {classes.paperRoot}>
             <ListItem>
               <ListItemText
