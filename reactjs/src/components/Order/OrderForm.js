@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme =>({
 
 export default function OrderForm(props) {
 
-  const { values, setValues, errors, setErrors, handleInputChange } = props;
+  const { values, setValues, errors, setErrors, handleInputChange, resetFormControls } = props;
   const classes = useStyles();
   
   const [customerList, setCustomerList] = useState([]);
@@ -78,7 +78,7 @@ export default function OrderForm(props) {
     if(validateForm()){
       createAPIEndpoint(ENDPIONTS.ORDER).create(values)
       .then(res=>{
-        console.log(res);
+        resetFormControls();
       })
       .catch(err=>console.log(err));
     }
