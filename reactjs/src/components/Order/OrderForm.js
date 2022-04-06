@@ -187,7 +187,7 @@ export default function OrderForm(props) {
               size="large"
               onClick={openListOfOrders}
               startIcon={<ReorderIcon />}
-            > Orderss</Button>
+            >Orders</Button>
           </Grid>
         </Grid>
       </Form>
