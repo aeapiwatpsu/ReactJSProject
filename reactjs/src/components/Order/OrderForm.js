@@ -89,7 +89,7 @@ export default function OrderForm(props) {
   const validateForm = () => {
     let temp = {};
     temp.customerId = values.customerId != 0 ? "" : "This field is required.";
-    temp.pMethods = values.pMethods != "none" ? "" : "This field is required.";
+    temp.pMethod = values.pMethod != "none" ? "" : "This field is required.";
     temp.orderDetails = values.orderDetails.length != 0 ? "" : "This field is required.";
     setErrors({ ...temp });
     return Object.values(temp).every(x=> x === "");

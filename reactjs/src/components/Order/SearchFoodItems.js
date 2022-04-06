@@ -65,7 +65,7 @@ export default function SearchFoodItems(props) {
 }, [searchKey, orderedFoodItems])
 
 
-const addFoodItem = foodItem => {
+  const addFoodItem = foodItem => {
   let x = {
     orderMasterId: values.orderMasterId,
     orderDetailId: 0,
@@ -73,7 +73,7 @@ const addFoodItem = foodItem => {
     quantity: 1,
     foodItemPrice: foodItem.price,
     foodItemName: foodItem.foodItemName
-}
+  }
   setValues({
     ...values,
     orderDetails: [...values.orderDetails, x]
