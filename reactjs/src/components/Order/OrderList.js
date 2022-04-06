@@ -6,7 +6,7 @@ import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 
 export default function OrderList(props) {
 
-    const { setOrderId, setOrderListVisibility} = props;
+    const { setOrderId, setOrderListVisibility, resetFormControls, setNotify} = props;
 
     const [orderList, setOrderList] = useState([]);
 
@@ -23,7 +23,21 @@ export default function OrderList(props) {
         setOrderListVisibility(false);
     }
 
+    const deleteOrder = id => {
+        if (window.confirm('Are you sure to delete this record?')) {
+            createAPIEndpoint(ENDPIONTS.ORDER).delete(id)
+                .then(res => {
+                    setOrderListVisibility(false);
+                    setOrderId(0);
+                    resetFormControls();
+                    setNotify({ isOpen: true, message: 'Deleted successfully.' });
+                })
+                .catch(err => console.log(err))
+        }
+    }
+
   return (
+    <>
     <Table>
         <TableHead>
             <TableRow>
@@ -56,12 +70,15 @@ export default function OrderList(props) {
                         </TableCell>
                         <TableCell>
                             <DeleteOutlineTwoToneIcon
-                            color="secondary"/>
+                            color="secondary"
+                            onClick={e => deleteOrder(item.orderMasterId)} />
                         </TableCell>
+                    
                     </TableRow>
                 ))
             }
         </TableBody>
     </Table>
+    </>
   )
 }

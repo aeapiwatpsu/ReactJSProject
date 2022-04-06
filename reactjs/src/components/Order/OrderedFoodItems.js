@@ -1,5 +1,5 @@
-import { List, ListItemText, Paper, ListItem, ListItemSecondaryAction, IconButton, ButtonGroup, Button, makeStyles } from '@material-ui/core';
 import React from 'react'
+import { List, ListItemText, Paper, ListItem, ListItemSecondaryAction, IconButton, ButtonGroup, Button, makeStyles } from '@material-ui/core';
 import DeleteOutlineTwoTone from '@material-ui/icons/DeleteOutlineTwoTone';
 import { roundTo2DecimalPoint } from "../../utils";
 
@@ -47,6 +47,7 @@ export default function OrderedFoodItems(props) {
   let orderedFoodItems = values.orderDetails;
 
   const removeFoodItem = (index, id) => {
+    debugger;
     let x = {...values};
     x.orderDetails = x.orderDetails.filter ((_, i) => i != index);
     if (id != 0)
@@ -77,7 +78,7 @@ export default function OrderedFoodItems(props) {
             }}
           />
         </ListItem>
-        :orderedFoodItems.map((item,idx)=>(
+        : orderedFoodItems.map((item,idx)=>(
           <Paper key={idx} className = {classes.paperRoot}>
             <ListItem>
               <ListItemText
@@ -85,7 +86,7 @@ export default function OrderedFoodItems(props) {
               primaryTypographyProps={{
                 component : 'h1',
                 style: {
-                    fontWeight : '300',
+                    fontWeight : '500',
                     fontSize: '1.2em'
                 }
             }}
@@ -104,9 +105,7 @@ export default function OrderedFoodItems(props) {
                     onClick={e=>updateQuantity(idx, 1)}
                   >+</Button>                
                 </ButtonGroup>
-                <span 
-                className = {classes.totalPerItem}
-                >
+                <span className = {classes.totalPerItem}>
                   { '$' + roundTo2DecimalPoint (item.quantity * item.foodItemPrice)}
                 </span>
               </>
@@ -116,11 +115,11 @@ export default function OrderedFoodItems(props) {
             }}
             />
               <ListItemSecondaryAction
-              className = {classes.deleteButton}
-              >
+              className = {classes.deleteButton}>
                 <IconButton
                 disableRipple
-                onClick={e=>removeFoodItem(idx, item.orderDetailId)}>
+                onClick={e=>removeFoodItem(idx, item.orderDetailId)}
+                >
                   <DeleteOutlineTwoTone />
                 </IconButton>
               </ListItemSecondaryAction>

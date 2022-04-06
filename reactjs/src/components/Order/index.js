@@ -5,9 +5,10 @@ import { Grid } from '@material-ui/core';
 import SearchFoodItems from './SearchFoodItems';
 import OrderedFoodItems from './OrderedFoodItems';
 
+
 const generateOrderNumber = () => Math.floor(100000 + Math.random() * 900000).toString();
 
-  const getFreshMethodObject = () =>({
+  const getFreshModelObject = () =>({
     orderMasterId : 0,
     orderNumber : generateOrderNumber(),
     customerId : 0,
@@ -16,6 +17,7 @@ const generateOrderNumber = () => Math.floor(100000 + Math.random() * 900000).to
     deletedOrderItemIds : '',
     orderDetails : []
   })
+
 
 export default function Order(){
 
@@ -26,25 +28,37 @@ export default function Order(){
         setErrors,
         handleInputChange,
         resetFormControls
-  } = useForm(getFreshMethodObject);
+  } = useForm(getFreshModelObject);
     
-
     return(
-   
             <Grid container spacing={2}>
                 <Grid item xs = {12}>
-                     <OrderForm
-                {...{ values, setValues, errors, setErrors, handleInputChange, resetFormControls }}
-                     />
+                  <OrderForm
+                    {...{ 
+                      values, 
+                      setValues, 
+                      errors, 
+                      setErrors, 
+                      handleInputChange, 
+                      resetFormControls 
+                    }}
+                  />
                 </Grid>
+
                    <Grid item xs = {6}>
                      <SearchFoodItems 
-                        {...{ values, setValues }}
+                        {...{ 
+                          values, 
+                          setValues 
+                        }}
                      />  
                    </Grid> 
                    <Grid item xs = {6}>
                      <OrderedFoodItems 
-                      {...{values, setValues}}
+                      {...{
+                        values, 
+                        setValues
+                      }}
                      />  
                    </Grid> 
             </Grid>

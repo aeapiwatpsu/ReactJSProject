@@ -36,10 +36,9 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function SearchFoodItem(props) {
+export default function SearchFoodItems(props) {
 
   const { values, setValues} = props;
-
   let orderedFoodItems = values.orderDetails;
 
   const [foodItems,setFoodItems] = useState([]);
@@ -65,19 +64,19 @@ export default function SearchFoodItem(props) {
     setSearchList(x);
 }, [searchKey, orderedFoodItems])
 
-const addFoodItem = foodItem => {
 
+const addFoodItem = foodItem => {
   let x = {
-    orderMasterId : values.orderMasterId,
-    orderDetailId : 0,
-    foodItemId : foodItem.foodItemId,
-    quantity : 1,
-    foodItemPrice : foodItem.price,
-    foodItemName:  foodItem.foodItemName
-  }
+    orderMasterId: values.orderMasterId,
+    orderDetailId: 0,
+    foodItemId: foodItem.foodItemId,
+    quantity: 1,
+    foodItemPrice: foodItem.price,
+    foodItemName: foodItem.foodItemName
+}
   setValues({
     ...values,
-    orderDetails : [...values.orderDetails, x]
+    orderDetails: [...values.orderDetails, x]
   })
 }
 
@@ -103,11 +102,11 @@ const addFoodItem = foodItem => {
               primary = {item.foodItemName}      
               secondary={'$' + item.price} />
               <ListItemSecondaryAction>
-                                <IconButton onClick={e => addFoodItem(item)}>
-                                    <PlusOneIcon />
-                                    <ArrowForwardIosIcon />
-                                </IconButton>
-                            </ListItemSecondaryAction>                
+                <IconButton onClick={e => addFoodItem(item)}>
+                  <PlusOneIcon />
+                  <ArrowForwardIosIcon />
+                </IconButton>
+              </ListItemSecondaryAction>                
           </ListItem>
         ))
       }
